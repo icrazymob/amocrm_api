@@ -17,6 +17,14 @@ class SingleFilter(Filter):
     def _as_params(self):
         return {"filter[{}]".format(self._name): self._value}
 
+class SingleCustomFilter(Filter):
+    def __call__(self, value):
+        self._value = value
+        return self
+
+    def _as_params(self, name):
+        return {"filter[custom_fields_values][{}]".format(self._name): self._value}
+
 
 class SingleListFilter(Filter):
     def __call__(self, value):
